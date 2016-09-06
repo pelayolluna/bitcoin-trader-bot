@@ -30,8 +30,8 @@ public class StandaloneTest {
         
 //        System.out.println(ip.computeAll());
 
-        System.out.println(BitstampData.getConversionRate());
-        System.out.println(BitstampData.getTickerData());
+//        System.out.println(BitstampData.getConversionRate());
+//        System.out.println(BitstampData.getTickerData());
         System.out.println(BitstampData.getOrderBookData());
 //        Thread thread = new Thread(new Predictor());
 //        thread.start();
