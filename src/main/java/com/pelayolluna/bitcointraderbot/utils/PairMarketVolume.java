@@ -24,17 +24,33 @@ import java.util.ResourceBundle;
  * @param <V>
  */
 public final class PairMarketVolume<M, V> {
-    
-    private static final ResourceBundle rbLiterals = ResourceBundle.getBundle("literals");
-    
+
+    /**
+     * Literals parameters.
+     */
+    private static final ResourceBundle RB_LITERALS
+            = ResourceBundle.getBundle("literals");
+    private static final int K_CONSTANT = 7 * 21;
+    /**
+     * Market prices.
+     */
     private M market;
+    /**
+     * Volume values.
+     */
     private V volume;
 
+    /**
+     * Pair constructor.
+     *
+     * @param market
+     * @param volume
+     */
     public PairMarketVolume(M market, V volume) {
         this.market = market;
         this.volume = volume;
     }
-    
+
     /**
      * @return the market
      */
@@ -62,23 +78,23 @@ public final class PairMarketVolume<M, V> {
     public void setVolume(V volume) {
         this.volume = volume;
     }
-    
+
     @Override
     public int hashCode() {
         int hashCode;
-        hashCode = 7 * 21 + (this.getMarket() != null ? this.getMarket().hashCode() : 0);
-        hashCode = 7 * 21 + (this.getVolume() != null ? this.getVolume().hashCode() : 0);
+        hashCode = this.getMarket().hashCode() * this.getVolume().hashCode();
+        hashCode = this.getVolume() != null ? (K_CONSTANT * hashCode) : 0;
         return hashCode;
     }
-    
 
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(final Object obj) {
         if (!(obj instanceof PairMarketVolume)) {
             return false;
         }
         PairMarketVolume obj2 = (PairMarketVolume) obj;
-        return this.market.equals(obj2.getMarket()) && this.volume.equals(obj2.getVolume());
+        return this.market.equals(obj2.getMarket())
+                && this.volume.equals(obj2.getVolume());
     }
 
     @Override
@@ -87,7 +103,7 @@ public final class PairMarketVolume<M, V> {
         sb.append(this.getMarket());
         sb.append("\n");
         sb.append(this.getVolume());
-        
+
         return sb.toString();
     }
 }

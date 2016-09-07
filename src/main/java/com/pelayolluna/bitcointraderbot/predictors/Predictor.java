@@ -30,15 +30,28 @@ import java.util.logging.Logger;
  */
 public class Predictor implements Runnable {
 
-    private static final PivotsIndicatorImpl PIVOT_INDICATOR = new PivotsIndicatorImpl();
+    /**
+     * Pivot indicator values.
+     */
+    private static final PivotsIndicatorImpl PIVOT_INDICATOR
+            = new PivotsIndicatorImpl();
+    /**
+     * Historic values.
+     */
     private static final List<BtcPrice> HISTORIC = new ArrayList<>();
+    /**
+     * Bitcoin prices.
+     */
     private BtcPrice btcPrice;
 
+    /**
+     * Public class constructor.
+     */
     public Predictor() {
     }
 
     @Override
-    public void run() {
+    public final void run() {
         final BigDecimal firstResistance = PIVOT_INDICATOR.getFirstResistence();
 
         while (true) {
@@ -46,21 +59,24 @@ public class Predictor implements Runnable {
                 btcPrice = BitstampData.getTickerData();
                 HISTORIC.add(btcPrice);
 
-                for (int i = 0; i < HISTORIC.size(); i++) {
-                    System.out.println(HISTORIC.get(i));
+                for (BtcPrice HISTORIC1 : HISTORIC) {
+                    System.out.println(HISTORIC1);
                 }
 
                 for (BtcPrice price : HISTORIC) {
                     if (price.getLastPrice().compareTo(firstResistance) == 1
-                            || price.getLastPrice().compareTo(firstResistance) == -1) {
+                            || price.getLastPrice()
+                            .compareTo(firstResistance) == -1) {
 
                         // Buy or sell BTCs
-                        System.out.println("Buy is recommended, BTC price=" + btcPrice.getLastPrice());
+                        System.out.println("Buy is recommended, BTC price="
+                                + btcPrice.getLastPrice());
                     }
                 }
                 Thread.sleep(6000);
             } catch (InterruptedException ex) {
-                Logger.getLogger(Predictor.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Predictor.class.getName())
+                        .log(Level.SEVERE, null, ex);
             }
         }
     }

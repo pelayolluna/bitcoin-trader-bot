@@ -29,76 +29,116 @@ import java.util.List;
 import java.util.ResourceBundle;
 import javafx.util.Pair;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 /**
  *
  * @author Pelayo Jose Lluna Gonzalez
  */
-public class BitstampData {
+public final class BitstampData {
 
-    protected static final ResourceBundle rbConfig = ResourceBundle.getBundle("config");
-    protected static final ResourceBundle rbLiterals = ResourceBundle.getBundle("literals");
+    /**
+     * Configuration parameters.
+     */
+    protected static final ResourceBundle RB_CONFIG
+            = ResourceBundle.getBundle("config");
+    /**
+     * Literals parameters.
+     */
+    protected static final ResourceBundle RB_LITERALS
+            = ResourceBundle.getBundle("literals");
+    /**
+     * Delay time constant.
+     */
+    private static final int DELAY_TIME = 60 * 1000;
+    /**
+     * Array size constant.
+     */
     private static final int SIZE_TMP_ARRAY = 2;
+    /**
+     * Regular expression 1.
+     */
     private static final String REGEX_1 = ",";
+    /**
+     * Regular expression 2.
+     */
     private static final String REGEX_2 = "\\[\"|\"|\\]|\"\\]";
 
+    /**
+     * Utility class private constructor.
+     */
+    private BitstampData() {
+    }
+
+    /**
+     * @return Ticker.
+     */
     public static BtcPrice getTickerData() {
 
         final BtcPrice btcPrice = new BtcPrice();
-        JSONObject data = null;
 
-        try {
-            data = new JSONObject(callURL(rbConfig.getString("tickerBtcUsd")));
-            btcPrice.setLastPrice(new BigDecimal(data.getString(rbConfig.getString("last"))));
-            btcPrice.setHighPrice(new BigDecimal(data.getString(rbConfig.getString("high"))));
-            btcPrice.setLowPrice(new BigDecimal(data.getString(rbConfig.getString("low"))));
-            btcPrice.setBidPrice(new BigDecimal(data.getString(rbConfig.getString("bid"))));
-            btcPrice.setAskPrice(new BigDecimal(data.getString(rbConfig.getString("ask"))));
-            btcPrice.setOpenPrice(new BigDecimal(data.getString(rbConfig.getString("open"))));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        final JSONObject data = new JSONObject(callURL(
+                RB_CONFIG.getString("tickerBtcUsd")));
+        btcPrice.setLastPrice(new BigDecimal(
+                data.getString(RB_CONFIG.getString("last"))));
+        btcPrice.setHighPrice(new BigDecimal(
+                data.getString(RB_CONFIG.getString("high"))));
+        btcPrice.setLowPrice(new BigDecimal(
+                data.getString(RB_CONFIG.getString("low"))));
+        btcPrice.setBidPrice(new BigDecimal(
+                data.getString(RB_CONFIG.getString("bid"))));
+        btcPrice.setAskPrice(new BigDecimal(
+                data.getString(RB_CONFIG.getString("ask"))));
+        btcPrice.setOpenPrice(new BigDecimal(
+                data.getString(RB_CONFIG.getString("open"))));
+
         return btcPrice;
     }
 
+    /**
+     * @return OrderBook data.
+     */
     public static OrderBook getOrderBookData() {
 
         OrderBook orderBook = new OrderBook();
-        JSONObject data = null;
 
-        try {
-            data = new JSONObject(callURL(rbConfig.getString("orderBookBtcUsd")));
+        final JSONObject data = new JSONObject(callURL(
+                RB_CONFIG.getString("orderBookBtcUsd")));
 
-            orderBook = initializeOrderBook(orderBook, data, "asks");
-            orderBook = initializeOrderBook(orderBook, data, "bids");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+        orderBook = initializeOrderBook(orderBook, data, "asks");
+        orderBook = initializeOrderBook(orderBook, data, "bids");
+
         return orderBook;
     }
 
+    /**
+     * @return Conversion rate.
+     */
     public static float getConversionRate() {
 
-        JSONObject data = null;
+        JSONObject data = new JSONObject(callURL(
+                RB_CONFIG.getString("conversionRate")));
 
-        try {
-            data = new JSONObject(callURL(rbConfig.getString("conversionRate")));
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
         return Float.parseFloat(data.getString("buy"));
     }
 
-    private static OrderBook initializeOrderBook(OrderBook orderBook, JSONObject data, String type) {
+    /**
+     * @param orderBook
+     * @param data
+     * @param type
+     * @return OrderBook initialized.
+     */
+    private static OrderBook initializeOrderBook(
+            final OrderBook orderBook, JSONObject data, String type) {
 
         final List<BigDecimal> tmpList1 = new ArrayList<>();
         final List<BigDecimal> tmpList2 = new ArrayList<>();
         final Pair<ArrayList<BigDecimal>, ArrayList<BigDecimal>> tmpAsk
-                = new Pair<>(new ArrayList<BigDecimal>(), new ArrayList<BigDecimal>());
+                = new Pair<>(new ArrayList<BigDecimal>(),
+                        new ArrayList<BigDecimal>());
         final Pair<ArrayList<BigDecimal>, ArrayList<BigDecimal>> tmpBid
-                = new Pair<>(new ArrayList<BigDecimal>(), new ArrayList<BigDecimal>());
+                = new Pair<>(new ArrayList<BigDecimal>(),
+                        new ArrayList<BigDecimal>());
 
         String[] tmpArray = new String[SIZE_TMP_ARRAY];
 
@@ -108,18 +148,23 @@ public class BitstampData {
             tmpList2.add(new BigDecimal(tmpArray[1].replaceAll(REGEX_2, "")));
         }
 
-        if (rbConfig.getString("asks").equals(type)) {
+        if (RB_CONFIG.getString("asks").equals(type)) {
             orderBook.setAskPair(new PairMarketVolume(tmpList1, tmpList2));
         }
-        if (rbConfig.getString("bids").equals(type)) {
+        if (RB_CONFIG.getString("bids").equals(type)) {
             orderBook.setBidPair(new PairMarketVolume(tmpList1, tmpList2));
         }
 
         return orderBook;
     }
 
-    private static String callURL(String myURL) {
-        System.out.println(rbLiterals.getString("urlCheck") + myURL);
+    /**
+     * @return String url.
+     *
+     * @param myURL
+     */
+    private static String callURL(final String myURL) {
+        System.out.println(RB_LITERALS.getString("urlCheck") + myURL);
         StringBuilder sb = new StringBuilder();
         URLConnection urlConn = null;
         InputStreamReader in = null;
@@ -127,7 +172,7 @@ public class BitstampData {
             URL url = new URL(myURL);
             urlConn = url.openConnection();
             if (urlConn != null) {
-                urlConn.setReadTimeout(60 * 1000);
+                urlConn.setReadTimeout(DELAY_TIME);
             }
             if (urlConn != null && urlConn.getInputStream() != null) {
                 in = new InputStreamReader(urlConn.getInputStream(),
@@ -143,7 +188,8 @@ public class BitstampData {
             }
             in.close();
         } catch (Exception e) {
-            throw new RuntimeException(rbLiterals.getString("urlException") + myURL, e);
+            throw new RuntimeException(
+                    RB_LITERALS.getString("urlException") + myURL, e);
         }
 
         return sb.toString();

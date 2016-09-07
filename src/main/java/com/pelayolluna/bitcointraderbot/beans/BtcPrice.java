@@ -24,12 +24,34 @@ import java.util.ResourceBundle;
  */
 public final class BtcPrice {
 
-    private static final ResourceBundle rbLiterals = ResourceBundle.getBundle("literals");
+    /**
+     * Configuration parameters.
+     */
+    private static final ResourceBundle RB_LITERALS
+            = ResourceBundle.getBundle("literals");
+    /**
+     * Bitcoin last price.
+     */
     private BigDecimal lastPrice;
+    /**
+     * Bitcoin highest price.
+     */
     private BigDecimal highPrice;
+    /**
+     * Bitcoin lowest price.
+     */
     private BigDecimal lowPrice;
+    /**
+     * Bitcoin bid price.
+     */
     private BigDecimal bidPrice;
+    /**
+     * Bitcoin ask price.
+     */
     private BigDecimal askPrice;
+    /**
+     * Bitcoin open price.
+     */
     private BigDecimal openPrice;
 
     /**
@@ -119,19 +141,19 @@ public final class BtcPrice {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        sb.append(rbLiterals.getString("lastPrice"));
+        sb.append(RB_LITERALS.getString("lastPrice"));
         sb.append(lastPrice);
         sb.append(", ");
-        sb.append(rbLiterals.getString("highPrice"));
+        sb.append(RB_LITERALS.getString("highPrice"));
         sb.append(highPrice);
         sb.append(", ");
-        sb.append(rbLiterals.getString("lowPrice"));
+        sb.append(RB_LITERALS.getString("lowPrice"));
         sb.append(lowPrice);
         sb.append(", ");
-        sb.append(rbLiterals.getString("bidPrice"));
+        sb.append(RB_LITERALS.getString("bidPrice"));
         sb.append(bidPrice);
         sb.append(", ");
-        sb.append(rbLiterals.getString("askPrice"));
+        sb.append(RB_LITERALS.getString("askPrice"));
         sb.append(askPrice);
         return sb.toString();
     }

@@ -18,7 +18,6 @@ package com.pelayolluna.bitcointraderbot.beans;
 import com.pelayolluna.bitcointraderbot.utils.PairMarketVolume;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -27,12 +26,23 @@ import java.util.ResourceBundle;
  */
 public final class OrderBook {
 
-    private static final ResourceBundle rbLiterals = ResourceBundle.getBundle("literals");
-    List<BigDecimal> tmp;
-
+    /**
+     * Configuration parameters.
+     */
+    private static final ResourceBundle RB_LITERALS
+            = ResourceBundle.getBundle("literals");
+    /**
+     * Ask pair.
+     */
     private PairMarketVolume<ArrayList<BigDecimal>, ArrayList<BigDecimal>> askPair;
+    /**
+     * Bid pair.
+     */
     private PairMarketVolume<ArrayList<BigDecimal>, ArrayList<BigDecimal>> bidPair;
 
+    /**
+     * Public class constructor.
+     */
     public OrderBook() {
     }
 
@@ -68,19 +78,19 @@ public final class OrderBook {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("\n");
-        sb.append(rbLiterals.getString("asks"));
+        sb.append(RB_LITERALS.getString("asks"));
         sb.append(this.getAskPair().getMarket());
         sb.append("\n");
-        sb.append(rbLiterals.getString("volumeAsks"));
+        sb.append(RB_LITERALS.getString("volumeAsks"));
         sb.append(this.getAskPair().getVolume());
         sb.append("\n");
-        sb.append(rbLiterals.getString("bids"));
+        sb.append(RB_LITERALS.getString("bids"));
         sb.append(this.getBidPair().getMarket());
         sb.append("\n");
-        sb.append(rbLiterals.getString("volumeBids"));
+        sb.append(RB_LITERALS.getString("volumeBids"));
         sb.append(this.getBidPair().getVolume());
-        
+
         return sb.toString();
     }
-    
+
 }

@@ -21,7 +21,7 @@ import com.pelayolluna.bitcointraderbot.datamanagers.BitstampData;
  *
  * @author Pelayo Jose Lluna Gonzalez
  */
-public class StandaloneTest {
+public class BitcoinPricesTest {
 
     public static void main(String[] args) {
         
@@ -30,8 +30,8 @@ public class StandaloneTest {
         
 //        System.out.println(ip.computeAll());
 
-//        System.out.println(BitstampData.getConversionRate());
-//        System.out.println(BitstampData.getTickerData());
+        System.out.println(BitstampData.getConversionRate());
+        System.out.println(BitstampData.getTickerData());
         System.out.println(BitstampData.getOrderBookData());
 //        Thread thread = new Thread(new Predictor());
 //        thread.start();

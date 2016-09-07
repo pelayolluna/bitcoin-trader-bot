@@ -26,21 +26,59 @@ import java.util.ResourceBundle;
  */
 public final class PivotsIndicatorImpl implements Indicable {
 
-    private final ResourceBundle rbLiterals = ResourceBundle.getBundle("literals");
-
+    /**
+     * Literals parameters.
+     */
+    private static final ResourceBundle RB_LITERALS
+            = ResourceBundle.getBundle("literals");
+    /**
+     * Pivots indicator.
+     */
     private PivotsIndicatorImpl pivotIndicator;
+    /**
+     * Bitcoin prices.
+     */
     private static final BtcPrice BTC_PRICE = BitstampData.getTickerData();
+    /**
+     * Divisor constant.
+     */
     private static final BigDecimal DIV = new BigDecimal(3);
+    /**
+     * Multiplier constant.
+     */
     private static final BigDecimal MUL = new BigDecimal(2);
-
+    /**
+     * Pivot point.
+     */
     private BigDecimal pivotPoint;
+    /**
+     * First resistance.
+     */
     private BigDecimal firstResistence;
+    /**
+     * First support.
+     */
     private BigDecimal firstSupport;
+    /**
+     * Second resistance.
+     */
     private BigDecimal secondResistence;
+    /**
+     * Second support.
+     */
     private BigDecimal secondSupport;
+    /**
+     * Third resistance.
+     */
     private BigDecimal thirdResistence;
+    /**
+     * Third support.
+     */
     private BigDecimal thirdSupport;
 
+    /**
+     * Public class constructor.
+     */
     public PivotsIndicatorImpl() {
     }
 
@@ -177,19 +215,26 @@ public final class PivotsIndicatorImpl implements Indicable {
 
         this.computeAll();
         sb.append("\n");
-        sb.append(rbLiterals.getString("pivotPoint")).append(getPivotPoint());
+        sb.append(RB_LITERALS.getString("pivotPoint"))
+                .append(getPivotPoint());
         sb.append("\n");
-        sb.append(rbLiterals.getString("firstResistance")).append(getFirstResistence());
+        sb.append(RB_LITERALS.getString("firstResistance"))
+                .append(getFirstResistence());
         sb.append("\n");
-        sb.append(rbLiterals.getString("firstSupport")).append(getFirstSupport());
+        sb.append(RB_LITERALS.getString("firstSupport"))
+                .append(getFirstSupport());
         sb.append("\n");
-        sb.append(rbLiterals.getString("secondResistance")).append(getSecondResistence());
+        sb.append(RB_LITERALS.getString("secondResistance"))
+                .append(getSecondResistence());
         sb.append("\n");
-        sb.append(rbLiterals.getString("secondSupport")).append(getSecondSupport());
+        sb.append(RB_LITERALS.getString("secondSupport"))
+                .append(getSecondSupport());
         sb.append("\n");
-        sb.append(rbLiterals.getString("thirdResistance")).append(getThirdResistence());
+        sb.append(RB_LITERALS.getString("thirdResistance"))
+                .append(getThirdResistence());
         sb.append("\n");
-        sb.append(rbLiterals.getString("thirdSupport")).append(getThirdSupport());
+        sb.append(RB_LITERALS.getString("thirdSupport"))
+                .append(getThirdSupport());
         sb.append("\n");
 
         return sb.toString();

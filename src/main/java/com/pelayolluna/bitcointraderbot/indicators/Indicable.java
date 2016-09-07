@@ -20,11 +20,9 @@ package com.pelayolluna.bitcointraderbot.indicators;
  * @author Pelayo Jose Lluna Gonzalez
  */
 public interface Indicable {
-    
     /**
      *
      * @return IndicatorProvider
      */
-    public abstract Indicable computeAll();
-    
+    Indicable computeAll();
 }
