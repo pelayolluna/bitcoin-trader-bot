@@ -129,7 +129,7 @@ public final class BitstampData {
      * @return OrderBook initialized.
      */
     private static OrderBook initializeOrderBook(
-            final OrderBook orderBook, JSONObject data, String type) {
+            final OrderBook orderBook, final JSONObject data, String type) {
 
         final List<BigDecimal> tmpList1 = new ArrayList<>();
         final List<BigDecimal> tmpList2 = new ArrayList<>();
