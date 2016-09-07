@@ -159,9 +159,8 @@ public final class BitstampData {
     }
 
     /**
-     * @return String url.
-     *
      * @param myURL
+     * @return String url.
      */
     private static String callURL(final String myURL) {
         System.out.println(RB_LITERALS.getString("urlCheck") + myURL);
