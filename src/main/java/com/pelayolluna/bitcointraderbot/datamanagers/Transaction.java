@@ -19,6 +19,6 @@ package com.pelayolluna.bitcointraderbot.datamanagers;
  *
  * @author Pelayo Jose Lluna Gonzalez
  */
-public class Transaction {
+public final class Transaction {
     
 }
