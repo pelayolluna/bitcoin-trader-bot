@@ -100,7 +100,7 @@ public final class PivotsIndicatorImpl implements Indicable {
     /**
      * @return the pivotPoint
      */
-    public BigDecimal getPivotPoint() {
+    public final BigDecimal getPivotPoint() {
         return (BTC_PRICE.getHighPrice()
                 .add(BTC_PRICE.getLowPrice()
                         .add(BTC_PRICE.getOpenPrice()))).divide(DIV);
@@ -109,14 +109,14 @@ public final class PivotsIndicatorImpl implements Indicable {
     /**
      * @param pivotPoint the pivotPoint to set
      */
-    public void setPivotPoint(BigDecimal pivotPoint) {
+    public final void setPivotPoint(BigDecimal pivotPoint) {
         this.pivotPoint = pivotPoint;
     }
 
     /**
      * @return the firstResistence
      */
-    public BigDecimal getFirstResistence() {
+    public final BigDecimal getFirstResistence() {
         return (this.pivotPoint
                 .multiply(MUL))
                 .subtract(BTC_PRICE.getLowPrice());
@@ -125,14 +125,14 @@ public final class PivotsIndicatorImpl implements Indicable {
     /**
      * @param firstResistence the firstResistence to set
      */
-    public void setFirstResistence(BigDecimal firstResistence) {
+    public final void setFirstResistence(BigDecimal firstResistence) {
         this.firstResistence = firstResistence;
     }
 
     /**
      * @return the firstSupport
      */
-    public BigDecimal getFirstSupport() {
+    public final BigDecimal getFirstSupport() {
         return (this.pivotPoint
                 .multiply(MUL))
                 .subtract(BTC_PRICE.getHighPrice());
@@ -141,14 +141,14 @@ public final class PivotsIndicatorImpl implements Indicable {
     /**
      * @param firstSupport the firstSupport to set
      */
-    public void setFirstSupport(BigDecimal firstSupport) {
+    public final void setFirstSupport(BigDecimal firstSupport) {
         this.firstSupport = firstSupport;
     }
 
     /**
      * @return the secondResistence
      */
-    public BigDecimal getSecondResistence() {
+    public final BigDecimal getSecondResistence() {
         return this.pivotPoint
                 .add(BTC_PRICE.getHighPrice()
                         .subtract(BTC_PRICE.getLowPrice()));
@@ -157,14 +157,14 @@ public final class PivotsIndicatorImpl implements Indicable {
     /**
      * @param secondResistence the secondResistence to set
      */
-    public void setSecondResistence(BigDecimal secondResistence) {
+    public final void setSecondResistence(BigDecimal secondResistence) {
         this.secondResistence = secondResistence;
     }
 
     /**
      * @return the secondSupport
      */
-    public BigDecimal getSecondSupport() {
+    public final BigDecimal getSecondSupport() {
         return this.pivotPoint
                 .subtract(BTC_PRICE.getHighPrice()
                         .subtract(BTC_PRICE.getLowPrice()));
@@ -173,14 +173,14 @@ public final class PivotsIndicatorImpl implements Indicable {
     /**
      * @param secondSupport the secondSupport to set
      */
-    public void setSecondSupport(BigDecimal secondSupport) {
+    public final void setSecondSupport(BigDecimal secondSupport) {
         this.secondSupport = secondSupport;
     }
 
     /**
      * @return the thirdResistence
      */
-    public BigDecimal getThirdResistence() {
+    public final BigDecimal getThirdResistence() {
         return BTC_PRICE.getHighPrice()
                 .add(MUL.multiply(this.pivotPoint
                                 .subtract(BTC_PRICE.getLowPrice())));
@@ -189,14 +189,14 @@ public final class PivotsIndicatorImpl implements Indicable {
     /**
      * @param thirdResistence the thirdResistence to set
      */
-    public void setThirdResistence(BigDecimal thirdResistence) {
+    public final void setThirdResistence(BigDecimal thirdResistence) {
         this.thirdResistence = thirdResistence;
     }
 
     /**
      * @return the thirdSupport
      */
-    public BigDecimal getThirdSupport() {
+    public final BigDecimal getThirdSupport() {
         return BTC_PRICE.getLowPrice()
                 .subtract(MUL.multiply(BTC_PRICE.getHighPrice()
                                 .subtract(this.pivotPoint)));
@@ -205,12 +205,12 @@ public final class PivotsIndicatorImpl implements Indicable {
     /**
      * @param thirdSupport the thirdSupport to set
      */
-    public void setThirdSupport(BigDecimal thirdSupport) {
+    public final void setThirdSupport(BigDecimal thirdSupport) {
         this.thirdSupport = thirdSupport;
     }
 
     @Override
-    public String toString() {
+    public final String toString() {
         final StringBuilder sb = new StringBuilder();
 
         this.computeAll();
