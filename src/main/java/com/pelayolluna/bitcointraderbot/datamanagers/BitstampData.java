@@ -73,7 +73,7 @@ public final class BitstampData {
     /**
      * @return Ticker.
      */
-    public static BtcPrice getTickerData() {
+    public static final BtcPrice getTickerData() {
 
         final BtcPrice btcPrice = new BtcPrice();
 
@@ -98,7 +98,7 @@ public final class BitstampData {
     /**
      * @return OrderBook data.
      */
-    public static OrderBook getOrderBookData() {
+    public static final OrderBook getOrderBookData() {
 
         OrderBook orderBook = new OrderBook();
 
@@ -114,7 +114,7 @@ public final class BitstampData {
     /**
      * @return Conversion rate.
      */
-    public static float getConversionRate() {
+    public static final float getConversionRate() {
 
         JSONObject data = new JSONObject(callURL(
                 RB_CONFIG.getString("conversionRate")));
@@ -128,7 +128,7 @@ public final class BitstampData {
      * @param type
      * @return OrderBook initialized.
      */
-    private static OrderBook initializeOrderBook(
+    private static final OrderBook initializeOrderBook(
             final OrderBook orderBook, final JSONObject data, String type) {
 
         final List<BigDecimal> tmpList1 = new ArrayList<>();
@@ -162,7 +162,7 @@ public final class BitstampData {
      * @param myURL
      * @return String url.
      */
-    private static String callURL(final String myURL) {
+    private static final String callURL(final String myURL) {
         System.out.println(RB_LITERALS.getString("urlCheck") + myURL);
         StringBuilder sb = new StringBuilder();
         URLConnection urlConn = null;
