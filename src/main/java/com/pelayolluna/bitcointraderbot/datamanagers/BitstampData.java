@@ -17,7 +17,7 @@ package com.pelayolluna.bitcointraderbot.datamanagers;
 
 import com.pelayolluna.bitcointraderbot.beans.BtcPrice;
 import com.pelayolluna.bitcointraderbot.beans.OrderBook;
-import com.pelayolluna.bitcointraderbot.utils.PairMarketVolume;
+import com.pelayolluna.utils.PairMarketVolume;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
