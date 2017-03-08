@@ -15,7 +15,7 @@
  */
 package com.pelayolluna.bitcointraderbot.beans;
 
-import com.pelayolluna.bitcointraderbot.utils.PairMarketVolume;
+import com.pelayolluna.utils.PairMarketVolume;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
